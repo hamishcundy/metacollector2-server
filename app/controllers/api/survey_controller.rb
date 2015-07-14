@@ -7,6 +7,15 @@ module Api
         format.any { render json: 'test'}
       end
     end
+
+    def new
+
+
+    end
+
+    def create
+
+    end
   end
 
 end
