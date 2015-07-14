@@ -1,20 +1,11 @@
 module Api
-  class ParticipantsController < ApplicationController
+  class SurveyController < ApplicationController
 
-    def test
+    def survey_details
       respond_to do |format|
         
         format.any { render json: 'test'}
       end
-    end
-
-
-
-
-
-    def create
-
-
     end
   end
 

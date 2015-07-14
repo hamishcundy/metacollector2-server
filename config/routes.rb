@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   
 
   namespace :api do
-    resources :paticipants
+    
     get 'testCall', to: 'participants#test'
+    get 'GetSurveyDetails', to: 'survey#survey_details'
+    post 'RegisterParticipant', to: 'participants#create'
+
   end
 end
