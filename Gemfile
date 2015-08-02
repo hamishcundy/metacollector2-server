@@ -26,6 +26,14 @@ gem 'devise'
 
 gem 'pg'
 
+gem 'haml'
+gem 'haml-rails'
+gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+gem 'bootstrap-material-design'
+gem 'paperclip'
+gem 'default_value_for'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

@@ -1,0 +1,23 @@
+=content_for :title do
+  Account settings | AppDeploy
+.devise-container-large
+  .top-bar
+    .logo
+      =image_tag 'appdeploy.png'
+    .title
+      Account settings
+  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put , class: 'devise-form'}) do |f|
+    = devise_error_messages!
+    .field
+      = f.label :email
+      %br/
+      = f.email_field :email, autofocus: true, class: 'form-control'
+    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+      %div
+        Currently waiting confirmation for: #{resource.unconfirmed_email}
+    =link_to edit_user_password_path do
+      .btn.btn-primary
+        Change your password
+    .actions
+      = f.submit "Update", class: 'btn btn-raised btn-success full-width'
+  

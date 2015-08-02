@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title 
+      =yield :title
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    .main-container.full-height.container-fluid
+      .dash-container.full-height
+        .left-pane
+          .logo
+            =image_tag 'ic_launcher.png'
+          .nav
+            = yield :nav
+        .right-pane
+          .title-block
+            .title-text
+              =yield :page_title
+            .options-menu
+              .btn-group.user-dropdown
+                .btn.btn-flat.btn-sm.dropdown-toggle{data: {toggle: 'dropdown', target: '#'}}
+                  
+                  =current_user.email
+                  %span.caret
+                %ul.dropdown-menu
+                  %li
+                    =link_to destroy_user_session_path, method: :delete do
+                      Log out
+                  %li
+                    =link_to edit_user_registration_path do
+                      Account settings
+                  
+          
+              
+              
+          .content-block
+            = yield

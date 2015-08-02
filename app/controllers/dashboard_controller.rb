@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
 
+  before_action :authenticate_user!
+
   def dashboard
 
   end
@@ -7,8 +9,6 @@ class DashboardController < ApplicationController
   def main
       if Survey.all.count == 0
         redirect_to new_api_survey_path
-      else
-        redirect_to :dashboard
       end
   end
 

@@ -1,0 +1,10 @@
+%ul
+  =link_to root_path do
+    %li{class: ('active' unless controller_name != 'dashboard')}
+      %i.fa.fa-fw.fa-dashboard
+      DASHBOARD
+  =link_to '#' do
+    %li{class: ('active' unless controller_name != 'groups')}
+      %i.fa.fa-fw.fa-users
+      GROUPS
+  

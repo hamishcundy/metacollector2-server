@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root to: 'dashboard#main'
 
-  get '/dashboard' => 'dashboard#dashboard'
+  get '/dashboard' => 'dashboard#main'
   namespace :api do
     
     
