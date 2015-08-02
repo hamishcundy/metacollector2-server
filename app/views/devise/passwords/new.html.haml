@@ -3,7 +3,7 @@
 .devise-container-large
   .top-bar
     .logo
-      =image_tag 'appdeploy.png'
+      =image_tag 'ic_launcher.png'
     .title
       Forgot password
   = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post, class: 'devise-form' }) do |f|
@@ -13,5 +13,5 @@
       %br/
       = f.email_field :email, autofocus: true, class: 'form-control'
     .actions
-      = f.submit "Send me reset password instructions", class: 'btn btn-raised btn-success full-width'
+      = f.submit "Send me reset password instructions", class: 'btn btn-raised btn-danger full-width'
     = render "devise/shared/links"

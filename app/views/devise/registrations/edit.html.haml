@@ -3,7 +3,7 @@
 .devise-container-large
   .top-bar
     .logo
-      =image_tag 'appdeploy.png'
+      =image_tag 'ic_launcher.png'
     .title
       Account settings
   = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put , class: 'devise-form'}) do |f|
@@ -19,5 +19,5 @@
       .btn.btn-primary
         Change your password
     .actions
-      = f.submit "Update", class: 'btn btn-raised btn-success full-width'
+      = f.submit "Update", class: 'btn btn-raised btn-danger full-width'
   
