@@ -8,8 +8,8 @@ module Api
 
 
     def create
-
-
+      @p = Participant.create(params)
+      render json: @p.id
     end
   end
 
