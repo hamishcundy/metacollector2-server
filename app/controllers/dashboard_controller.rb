@@ -12,4 +12,8 @@ class DashboardController < ApplicationController
       end
   end
 
+  def participants
+    
+  end
+
 end

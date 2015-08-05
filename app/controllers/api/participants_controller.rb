@@ -8,7 +8,7 @@ module Api
 
 
     def create
-      @p = Participant.create(params)
+      @p = Participant.create(params.permit(:name, :email, :imei))
       render json: @p.id
     end
   end
