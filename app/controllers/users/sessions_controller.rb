@@ -1,10 +1,14 @@
 class Users::SessionsController < Devise::SessionsController
 # before_filter :configure_sign_in_params, only: [:create]
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+  #GET /resource/sign_in
+  def new
+    if User.all.count == 0
+      redirect_to new_user_registration_path
+    else
+      super
+    end
+  end
 
   # POST /resource/sign_in
   # def create

@@ -5,12 +5,13 @@ Rails.application.routes.draw do
 
   get '/dashboard' => 'dashboard#main'
   get '/participants' => 'dashboard#participants'
+  resources :surveys, only: [:create, :new, :edit, :update]
   namespace :api do
     
     
     get 'GetSurveyDetails', to: 'survey#survey_details'
     post 'RegisterParticipant', to: 'participants#create'
-    resources :survey, only: [:create, :new, :edit, :update]
+    
     resources :participant, only: [:create]
 
   end

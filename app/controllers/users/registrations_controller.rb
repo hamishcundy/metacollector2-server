@@ -3,9 +3,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if User.all.count > 0
+      redirect_to new_user_session_path
+    else
+      super
+    end
+
+  end
 
   # POST /resource
   # def create
