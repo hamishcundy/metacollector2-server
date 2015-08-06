@@ -1,0 +1,9 @@
+=form_for(Survey.new) do |f|
+  //.form-group
+  =f.text_field :name, placeholder: 'Name', class: 'form-control'
+  //.form-group
+  =f.text_area :terms, placeholder: 'Terms and Conditions', class: 'form-control'
+  .form-group
+    =f.label "Record participant details (name and email)"
+    =f.check_box :details_required
+  =f.submit "Create Survey", class: 'btn btn-danger'
