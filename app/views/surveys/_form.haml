@@ -1,4 +1,4 @@
-=form_for(Survey.new) do |f|
+=form_for(@survey) do |f|
   //.form-group
   =f.text_field :name, placeholder: 'Name', class: 'form-control'
   //.form-group
@@ -6,4 +6,7 @@
   .form-group
     =f.label "Record participant details (name and email)"
     =f.check_box :details_required
-  =f.submit "Create Survey", class: 'btn btn-danger'
+  -if action_name == 'new'
+    =f.submit "Create Survey", class: 'btn btn-danger'
+  -else
+    =f.submit "Save changes", class: 'btn btn-danger'

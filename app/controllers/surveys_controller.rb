@@ -1,7 +1,7 @@
 class SurveysController < ApplicationController
 
   def new
-
+    @survey = Survey.new
   end
 
   def create
@@ -10,7 +10,7 @@ class SurveysController < ApplicationController
   end
 
   def edit
-
+    @survey = Survey.first
   end
 
   def update

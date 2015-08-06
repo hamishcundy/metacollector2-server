@@ -7,4 +7,8 @@
     %li{class: ('active' unless action_name != 'participants')}
       %i.fa.fa-fw.fa-users
       PARTICIPANTS
+  =link_to edit_survey_path(Survey.first) do
+    %li{class: ('active' unless controller_name != 'surveys')}
+      %i.fa.fa-fw.fa-cogs
+      CONFIGURE SURVEY
   
