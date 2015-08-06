@@ -7,4 +7,28 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th
+          Participant ID
+        %th
+          Name
+        %th
+          Email
+        %th
+          IMEI
+
+        
+    %tbody
+      -Participant.all.each do |g|
+        %tr
+          %td
+            =g.id
+          %td
+            =g.name
+          %td
+            =g.email
+          %td
+            =g.imei
   
