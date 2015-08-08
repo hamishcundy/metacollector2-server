@@ -6,7 +6,7 @@ class SurveysController < ApplicationController
 
   def create
     Survey.create(params[:survey].permit!)
-    redirect_to dashboard_path
+    redirect_to dashboard_path, notice: 'Survey successfully created'
   end
 
   def edit
@@ -14,6 +14,8 @@ class SurveysController < ApplicationController
   end
 
   def update
-
+    @survey = Survey.first
+    @survey.update_attributes(params[:survey].permit!)
+    redirect_to dashboard_path, notice: 'Survey successfully updated'
   end
 end
