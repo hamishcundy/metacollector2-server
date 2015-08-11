@@ -15,7 +15,11 @@ class SurveysController < ApplicationController
 
   def update
     @survey = Survey.first
-    @survey.update_attributes(params[:survey].permit!)
-    redirect_to dashboard_path, notice: 'Survey successfully updated'
+    if @survey.update(params[:survey].permit!) do
+      redirect_to dashboard_path, notice: 'Survey successfully updated'
+    else
+      redirect_to dashboard_path, notice: 'Survey failed to update'
+    end
   end
 end
+
