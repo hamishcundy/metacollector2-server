@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150808064333) do
+ActiveRecord::Schema.define(version: 20150811053446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "collection_sources", force: :cascade do |t|
+    t.string   "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean  "required"
+    t.integer  "survey_id"
+  end
+
+  add_index "collection_sources", ["key"], name: "index_collection_sources_on_key", unique: true, using: :btree
+  add_index "collection_sources", ["survey_id"], name: "index_collection_sources_on_survey_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.string   "imei"
@@ -57,5 +68,6 @@ ActiveRecord::Schema.define(version: 20150808064333) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "collection_sources", "surveys"
   add_foreign_key "participants", "surveys"
 end
