@@ -1,5 +1,19 @@
 =form_for(@survey) do |f|
-  =@sources
+  .list-group
+    -@sources.each do |s|
+      .list-group-item
+        .row-action-primary
+          =check_box_tag("#{s[:key]}_available", s[:available])
+        .row-content
+          %h4.list-group-item-heading
+            =s[:key]
+          %p.list-group-item-text
+            =label_tag "Required"
+            =check_box_tag("#{s[:key]}_required", s[:required])
+      .list-group-separator
+
+      
+        
   .form-group
     =f.text_field :name, placeholder: 'Name', class: 'form-control'
   .form-group

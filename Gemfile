@@ -29,11 +29,10 @@ gem 'pg'
 gem 'haml'
 gem 'haml-rails'
 gem 'bootstrap-sass'
-gem 'font-awesome-rails'
-gem 'bootstrap-material-design'
+
 gem 'paperclip'
 gem 'default_value_for'
-
+gem "font-awesome-rails"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
