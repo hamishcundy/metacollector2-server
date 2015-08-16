@@ -17,8 +17,18 @@ class SurveysController < ApplicationController
 
   def update
     @survey = Survey.first
-    @survey.collection_sources.delete_all
-    if @survey.update(params[:survey].permit(:name, :terms, :details_required, :collection_source_attributes))
+    survey_params = params[:survey].permit(:name, :terms, :details_required, :collection_sources_attributes => [:survey_id, :key, :required, :available])
+    collection_params = survey_params.delete("collection_sources_attributes")
+    @survey.collection_sources.destroy_all
+    collection_params.each do |p|
+      logger.debug p
+      if p["available"]
+        logger.debug "saving"
+        p.delete("available")
+        @survey.collection_sources.create(p)
+      end
+    end
+    if @survey.update(survey_params)
       redirect_to dashboard_path, notice: 'Survey successfully updated'
     else
       redirect_to dashboard_path, notice: 'Survey failed to update'

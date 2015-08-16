@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811053446) do
+ActiveRecord::Schema.define(version: 20150816053210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,9 +23,6 @@ ActiveRecord::Schema.define(version: 20150811053446) do
     t.boolean  "required"
     t.integer  "survey_id"
   end
-
-  add_index "collection_sources", ["key"], name: "index_collection_sources_on_key", unique: true, using: :btree
-  add_index "collection_sources", ["survey_id"], name: "index_collection_sources_on_survey_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.string   "imei"
