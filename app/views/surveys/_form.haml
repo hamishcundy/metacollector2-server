@@ -1,15 +1,16 @@
 =form_for(@survey) do |f|
   .list-group
     -@sources.each do |s|
+      =hidden_field_tag "survey[collection_source_attributes][][key]", s[:key]
       .list-group-item
         .row-action-primary
-          =check_box_tag("#{s[:key]}_available", s[:available])
+          =check_box_tag("survey[collection_source_attributes][][available]", "1", s[:available])
         .row-content
           %h4.list-group-item-heading
             =s[:key]
           %p.list-group-item-text
             =label_tag "Required"
-            =check_box_tag("#{s[:key]}_required", s[:required])
+            =check_box_tag("survey[collection_source_attributes][][required]", "1", s[:required])
       .list-group-separator
 
       

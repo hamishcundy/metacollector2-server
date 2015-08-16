@@ -6,7 +6,7 @@ class SurveysController < ApplicationController
   end
 
   def create
-    Survey.create(params[:survey].permit!)
+    Survey.create(params[:survey].permit(:name, :terms, :details_required))
     redirect_to dashboard_path, notice: 'Survey successfully created'
   end
 
@@ -17,7 +17,8 @@ class SurveysController < ApplicationController
 
   def update
     @survey = Survey.first
-    if @survey.update(params[:survey].permit!)
+    @survey.collection_sources.delete_all
+    if @survey.update(params[:survey].permit(:name, :terms, :details_required, :collection_source_attributes))
       redirect_to dashboard_path, notice: 'Survey successfully updated'
     else
       redirect_to dashboard_path, notice: 'Survey failed to update'
