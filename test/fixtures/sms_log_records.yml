@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  thread_id: 1
+  address: MyString
+  person: 1
+  date: 
+  date_sent: 
+  type: 1
+  participant_id: 
+
+two:
+  thread_id: 1
+  address: MyString
+  person: 1
+  date: 
+  date_sent: 
+  type: 1
+  participant_id: 

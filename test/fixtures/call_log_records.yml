@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  formatted_number: MyString
+  numbertype: 1
+  duration: 1
+  presentation: 1
+  type: 1
+  number: MyString
+  date: 
+  numberlabel: MyString
+  name: MyString
+  matched_number: MyString
+  normalized_number: MyString
+  participant_id: 
+
+two:
+  formatted_number: MyString
+  numbertype: 1
+  duration: 1
+  presentation: 1
+  type: 1
+  number: MyString
+  date: 
+  numberlabel: MyString
+  name: MyString
+  matched_number: MyString
+  normalized_number: MyString
+  participant_id: 

@@ -11,10 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150816053210) do
+ActiveRecord::Schema.define(version: 20150820081220) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "call_log_records", force: :cascade do |t|
+    t.string   "formattedNumber"
+    t.integer  "numberType"
+    t.integer  "duration"
+    t.integer  "presentation"
+    t.integer  "type"
+    t.string   "number"
+    t.integer  "date",             limit: 8
+    t.string   "numberLabel"
+    t.string   "name"
+    t.string   "matchedNumber"
+    t.string   "normalizedNumber"
+    t.integer  "participant_id"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "call_log_records", ["participant_id"], name: "index_call_log_records_on_participant_id", using: :btree
 
   create_table "collection_sources", force: :cascade do |t|
     t.string   "key"
@@ -23,6 +42,16 @@ ActiveRecord::Schema.define(version: 20150816053210) do
     t.boolean  "required"
     t.integer  "survey_id"
   end
+
+  create_table "installed_app_records", force: :cascade do |t|
+    t.string   "packageName"
+    t.string   "appName"
+    t.integer  "participant_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "installed_app_records", ["participant_id"], name: "index_installed_app_records_on_participant_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.string   "imei"
@@ -34,6 +63,20 @@ ActiveRecord::Schema.define(version: 20150816053210) do
   end
 
   add_index "participants", ["survey_id"], name: "index_participants_on_survey_id", using: :btree
+
+  create_table "sms_log_records", force: :cascade do |t|
+    t.integer  "threadId"
+    t.string   "address"
+    t.integer  "person"
+    t.integer  "date",           limit: 8
+    t.integer  "dateSent",       limit: 8
+    t.integer  "type"
+    t.integer  "participant_id"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "sms_log_records", ["participant_id"], name: "index_sms_log_records_on_participant_id", using: :btree
 
   create_table "surveys", force: :cascade do |t|
     t.string   "name"
@@ -65,6 +108,9 @@ ActiveRecord::Schema.define(version: 20150816053210) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "call_log_records", "participants"
   add_foreign_key "collection_sources", "surveys"
+  add_foreign_key "installed_app_records", "participants"
   add_foreign_key "participants", "surveys"
+  add_foreign_key "sms_log_records", "participants"
 end
