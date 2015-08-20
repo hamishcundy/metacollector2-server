@@ -6,7 +6,7 @@ class CreateSmsLogRecords < ActiveRecord::Migration
       t.integer :person
       t.bigint :date
       t.bigint :dateSent
-      t.integer :type
+      t.integer :messageType
       t.references :participant, index: true
 
       t.timestamps null: false

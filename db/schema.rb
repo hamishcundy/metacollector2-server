@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20150820081220) do
     t.integer  "numberType"
     t.integer  "duration"
     t.integer  "presentation"
-    t.integer  "type"
+    t.integer  "callType"
     t.string   "number"
     t.integer  "date",             limit: 8
     t.string   "numberLabel"
@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 20150820081220) do
     t.integer  "person"
     t.integer  "date",           limit: 8
     t.integer  "dateSent",       limit: 8
-    t.integer  "type"
+    t.integer  "messageType"
     t.integer  "participant_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false

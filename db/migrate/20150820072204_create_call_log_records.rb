@@ -5,7 +5,7 @@ class CreateCallLogRecords < ActiveRecord::Migration
       t.integer :numberType
       t.integer :duration
       t.integer :presentation
-      t.integer :type
+      t.integer :callType
       t.string :number
       t.bigint :date
       t.string :numberLabel
