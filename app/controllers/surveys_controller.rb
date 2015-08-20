@@ -6,8 +6,21 @@ class SurveysController < ApplicationController
   end
 
   def create
-    Survey.create(params[:survey].permit(:name, :terms, :details_required))
-    redirect_to dashboard_path, notice: 'Survey successfully created'
+    
+    survey_params = params[:survey].permit(:name, :terms, :details_required, :collection_sources_attributes => [:survey_id, :key, :required, :available])
+    collection_params = survey_params.delete("collection_sources_attributes")
+    @survey = Survey.create(survey_params)
+    collection_params.each do |p|
+      
+      if p["available"]
+        
+        p.delete("available")
+        @survey.collection_sources.create(p)
+      end
+    end
+    
+    redirect_to dashboard_path, notice: 'Survey successfully updated'
+    
   end
 
   def edit
