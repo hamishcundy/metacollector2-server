@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     
     get 'GetSurveyDetails', to: 'survey#survey_details'
     post 'RegisterParticipant', to: 'participants#create'
+    post 'UploadMetadata', to: 'data#upload'
     
     resources :participant, only: [:create]
 
