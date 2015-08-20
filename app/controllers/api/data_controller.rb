@@ -13,7 +13,7 @@ module Api
         when "call_logs"
           CallLogRecord.create(p.permit!)
         when "sms_logs"
-          SMSLogRecord.create(p.permit!)
+          SmsLogRecord.create(p.permit!)
         when "contacts"
 
         when "installed_apps"
