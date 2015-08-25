@@ -49,7 +49,7 @@ class SurveysController < ApplicationController
   end
 
   def get_source_string_list
-    return Array['call_logs', 'sms_logs', 'contacts', 'installed_apps']
+    return Array['call_logs', 'sms_logs', 'contacts', 'installed_apps', 'facebook_data']
   end
 
   def get_source_list
