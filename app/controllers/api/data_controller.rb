@@ -8,17 +8,17 @@ module Api
       logger.debug params
       @participant = Participant.find(params[:participantId])
       @key = params[:source]
-      
+
       #clear all existing records of this type for this participant
       case @key
         when "call_logs"
-          @participant.call_log_records.delete_all
+          @participant.call_log_records.destroy_all
         when "sms_logs"
-          @participant.sms_log_records.delete_all
+          @participant.sms_log_records.destroy_all
         when "contacts"
 
         when "installed_apps"
-          @participant.installed_app_records.delete_all
+          @participant.installed_app_records.destroy_all
         end
 
       #add each record  
