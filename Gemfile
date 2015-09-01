@@ -33,6 +33,7 @@ gem 'bootstrap-sass'
 gem 'paperclip'
 gem 'default_value_for'
 gem "font-awesome-rails"
+gem "d3-rails"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
