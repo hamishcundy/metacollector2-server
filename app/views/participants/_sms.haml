@@ -15,7 +15,7 @@
         %td
           =g.address
         %td
-          =DateTime.strptime((g.date / 1000).to_s,'%s')
+          =DateTime.strptime((g.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%c')
 
         
   
