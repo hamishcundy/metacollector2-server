@@ -12,7 +12,7 @@ class ParticipantsController < ApplicationController
     sms_dates = participant.sms_log_records.pluck(:date)
     sms_array = Array.new
     sms_dates.each do |d|
-      sms_array << {:starting_time => d, :display => "circle"}
+      sms_array << {:starting_time => d / 1000, :display => "circle"}
     end
     master_array << {:label => "SMS", :times => sms_array}
 
