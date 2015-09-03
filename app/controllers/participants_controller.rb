@@ -5,12 +5,20 @@ class ParticipantsController < ApplicationController
   before_action :authenticate_user!
 
   def timeline_data
-    participant = Participant.first
-    dates = participant.sms_log_records.pluck(:date)
-    logger.debug dates
+    master_array = Array.new
+    participant = Participant.find(params[:id])
+
+
+    sms_dates = participant.sms_log_records.pluck(:date)
+    sms_array = Array.new
+    sms_dates.each do |d|
+      sms_array << {:starting_time => d, :display => "circle"}
+    end
+    master_array << {:label => "SMS", :times => sms_array}
+
     respond_to do |format|
       format.json {
-        render :json => [1,2,3,4,5]
+        render :json => master_array
       }
     end
   end
