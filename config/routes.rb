@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root to: 'dashboard#main'
 
   get '/dashboard' => 'dashboard#main'
-  resources :participants, only: [:index] do
+  resources :participants, only: [:index, :destroy] do
     member do
+      get '/summary' => 'participants#summary'
+      get '/data' => 'participants#data'
       get '/timeline' => 'participants#timeline'
       get '/timeline_data' => 'participants#timeline_data', :defaults => { :format => 'json'}
       get '/analysis' => 'participants#analysis'

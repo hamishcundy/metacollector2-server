@@ -1,0 +1,31 @@
+=content_for :title do
+  Participant Summary | MetaCollector 2
+=content_for :page_title do
+  %i.fa.fa-lg.fa-user
+  Participant Summary
+=content_for :nav do
+  =render :partial => 'shared/nav'
+=render :partial => 'shared/alert'
+.dashboard-block
+  .button-bar
+    =link_to participant_path(@participant), data: { confirm: "Are you sure you wish to delete this participant?" }, method: :delete do
+      .btn.btn-raised.btn-danger
+        %i.fa.fa-trash
+        Delete participant + data
+
+  .summary-panel.panel.panel-default
+    .panel-heading
+      %h4.panel-title Participant information
+    .panel-body
+      ="Participant ID: #{@participant.id}"
+      %br
+      ="Device IMEI: #{@participant.imei}"
+      %br
+      ="Registered: #{@participant.created_at}"
+      %br
+      -if @participant.email
+        ="Email: #{@participant.email}"
+        %br
+      -if @participant.name
+        ="Name: #{@participant.name}"
+        %br

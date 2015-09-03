@@ -3,13 +3,14 @@ class ParticipantsController < ApplicationController
 
 
   before_action :authenticate_user!
+  before_action :get_participant, :except => [:index]
 
   def timeline_data
     master_array = Array.new
-    participant = Participant.find(params[:id])
+    
 
 
-    sms_dates = participant.sms_log_records.pluck(:date)
+    sms_dates = @participant.sms_log_records.pluck(:date)
     sms_array = Array.new
     imin = 99999999999999
     imax = 0
@@ -41,6 +42,21 @@ class ParticipantsController < ApplicationController
   end
 
   def index
+
+  end
+
+  def summary
+
+  end
+  def data
+
+  end
+
+  def get_participant
+    @participant = Participant.find(params[:id])
+  end
+
+  def destroy
 
   end
 

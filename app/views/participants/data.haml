@@ -1,0 +1,25 @@
+=content_for :title do
+  Participant Data | MetaCollector 2
+=content_for :page_title do
+  %i.fa.fa-lg.fa-table
+  Participant Data
+=content_for :nav do
+  =render :partial => 'shared/nav'
+=render :partial => 'shared/alert'
+.dashboard-block
+  .data-block
+    %ul.nav.nav-tabs{role:'tablist'}
+      %li.active{role:'presentation'}
+        =link_to "Call logs", "#calls", "data-toggle" => "tab"
+      %li{role:'presentation'}
+        =link_to "SMS logs", "#sms", "data-toggle" => "tab"
+      %li{role:'presentation'}
+        =link_to "Installed apps", "#apps", "data-toggle" => "tab"
+    .tab-content
+      .tab-pane.active#calls{role: 'tabpanel'}
+        =render :partial => 'calls'
+      .tab-pane#sms
+        =render :partial => 'sms'
+      .tab-pane#apps{role: 'tabpanel'}
+        Apps
+  

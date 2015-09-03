@@ -1,0 +1,21 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        Number
+      %th
+        Time
+
+      
+
+      
+  %tbody
+    -@participant.sms_log_records.each do |g|
+      %tr
+        %td
+          =g.address
+        %td
+          =DateTime.strptime((g.date / 1000).to_s,'%s')
+
+        
+  

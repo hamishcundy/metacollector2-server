@@ -11,7 +11,7 @@
     display: flex
 
     .left-pane
-      width: 250px
+      width: 300px
       position: relative
       background-color: #f44336
       
@@ -39,7 +39,10 @@
           
           color: white
           padding: 15px
-          //font-size: medium
+          font-size: medium
+          &.subitem
+            font-size: small
+            padding-left: 30px
           .badge
             color: #0288d1
             background-color: white
@@ -55,6 +58,8 @@
       width: 100%
       background-color: #eee
       opacity: 0.9
+      .summary-panel
+        margin-top: 15px
 
       .title-block
         background-color: white

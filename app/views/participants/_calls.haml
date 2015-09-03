@@ -1,0 +1,31 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        Number
+      %th
+        Name
+      %th
+        Type
+      %th
+        Time
+      %th
+        Duration
+      
+
+      
+  %tbody
+    -@participant.call_log_records.each do |g|
+      %tr
+        %td
+          =g.number
+        %td
+          =g.name
+        %td
+          =get_type_string(g.callType)
+        %td
+          =DateTime.strptime((g.date / 1000).to_s,'%s')
+        %td
+          =g.duration
+        
+  
