@@ -17,6 +17,8 @@
         %th
           Email
         %th
+          Type
+        %th
           IMEI
 
         
@@ -29,6 +31,12 @@
             =g.name
           %td
             =g.email
+          %td
+            ="SMS: #{g.sms_log_records.count}"
+            %br
+            ="Call log: #{g.call_log_records.count}"
+            %br
+            ="Installed apps: #{g.installed_app_records.count}"
           %td
             =g.imei
           %td
