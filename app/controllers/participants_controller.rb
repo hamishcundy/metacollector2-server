@@ -1,10 +1,8 @@
-class GraphController < ApplicationController
+class ParticipantsController < ApplicationController
+
+
 
   before_action :authenticate_user!
-
-  def index
-
-  end
 
   def timeline_data
     participant = Participant.first
@@ -16,4 +14,18 @@ class GraphController < ApplicationController
       }
     end
   end
+
+  def timeline
+
+  end
+
+  def analysis
+
+  end
+
+  def index
+
+  end
+
+
 end

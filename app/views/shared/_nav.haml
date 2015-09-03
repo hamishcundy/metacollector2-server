@@ -4,11 +4,14 @@
       %i.fa.fa-fw.fa-dashboard
       DASHBOARD
   =link_to participants_path do
-    %li{class: ('active' unless action_name != 'participants')}
+    %li{class: ('active' unless controller_name != 'participants' && action_name != 'index')}
       %i.fa.fa-fw.fa-users
       PARTICIPANTS
+  //-if controller_name == 'participants'
+
   =link_to edit_survey_path(Survey.first) do
     %li{class: ('active' unless controller_name != 'surveys')}
       %i.fa.fa-fw.fa-cogs
       CONFIGURE SURVEY
+  
   

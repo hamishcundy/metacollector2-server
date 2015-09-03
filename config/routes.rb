@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   root to: 'dashboard#main'
 
   get '/dashboard' => 'dashboard#main'
-  get '/participants/graph' => 'graph#index'
-  get '/participants/timeline' => 'graph#timeline_data', :defaults => { :format => 'json' }
-  get '/participants' => 'dashboard#participants'
+  resources :participants, only: [:index] do
+    member do
+      get '/timeline' => 'participants#timeline'
+      get '/timeline_data' => 'participants#timeline_data', :defaults => { :format => 'json'}
+      get '/analysis' => 'participants#analysis'
+    end
+  end
+
+  
   resources :surveys, only: [:create, :new, :edit, :update]
 
   namespace :api do
