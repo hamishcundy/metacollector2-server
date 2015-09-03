@@ -13,7 +13,7 @@ $.ajax({
 
 function draw(data) {
   var chart = d3.timeline();
-  var svg = d3.select("#timeline").append("svg").attr("width", 500).datum(data).call(chart);
+  var svg = d3.select("#timeline").append("svg").attr("width", 500).datum(data).ending(new Date() / 1000).call(chart);
 
 
     // var color = d3.scale.category20b();

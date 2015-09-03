@@ -11,8 +11,17 @@ class ParticipantsController < ApplicationController
 
     sms_dates = participant.sms_log_records.pluck(:date)
     sms_array = Array.new
+    imin = 99999999999999
+    imax = 0
     sms_dates.each do |d|
       sms_array << {:starting_time => d / 1000, :display => "circle"}
+      if d > imax
+        imax = d
+      end
+      if d < imin
+        imin = d
+      end
+
     end
     master_array << {:label => "SMS", :times => sms_array}
 
