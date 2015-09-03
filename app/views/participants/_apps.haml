@@ -1,0 +1,21 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        Name
+      %th
+        Package
+
+      
+
+      
+  %tbody
+    -@participant.installed_app_records.each do |g|
+      %tr
+        %td
+          =g.appName
+        %td
+          =g.packageName
+
+        
+  
