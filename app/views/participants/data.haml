@@ -15,11 +15,15 @@
         =link_to "SMS logs", "#sms", "data-toggle" => "tab"
       %li{role:'presentation'}
         =link_to "Installed apps", "#apps", "data-toggle" => "tab"
+      %li{role:'presentation'}
+        =link_to "Location", "#location", "data-toggle" => "tab"
     .tab-content
       .tab-pane.active#calls{role: 'tabpanel'}
         =render :partial => 'calls'
-      .tab-pane#sms
+      .tab-pane#sms{role: 'tabpanel'}
         =render :partial => 'sms'
       .tab-pane#apps{role: 'tabpanel'}
         =render :partial => 'apps'
+      .tab-pane#location{role: 'tabpanel'}
+        =render :partial => 'location'
   

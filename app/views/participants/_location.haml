@@ -1,0 +1,29 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        Source
+      %th
+        Time
+      %th
+        Latitude
+      %th
+        Longitude
+
+      
+
+      
+  %tbody
+    -@participant.location_records.each do |g|
+      %tr
+        %td
+          =g.source
+        %td
+          =DateTime.strptime((g.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%c')
+        %td
+          =g.latitude
+        %td
+          =g.longitude
+
+        
+  
