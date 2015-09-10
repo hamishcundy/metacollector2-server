@@ -39,6 +39,12 @@ module Api
       
     end
 
+    def location
+      @participant = Participant.find(params[:participant_id])
+      @participant.location_records.create(params.permit(:longitude, :latitude, :accuracy))
+
+    end
+
 
   end
 

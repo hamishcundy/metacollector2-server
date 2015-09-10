@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  participant_id: 
+  latitude: 1
+  longitude: 1
+  accuracy: 1.5
+  date: 1
+
+two:
+  participant_id: 
+  latitude: 1
+  longitude: 1
+  accuracy: 1.5
+  date: 1

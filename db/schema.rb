@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820081220) do
+ActiveRecord::Schema.define(version: 20150910101040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,18 @@ ActiveRecord::Schema.define(version: 20150820081220) do
   end
 
   add_index "installed_app_records", ["participant_id"], name: "index_installed_app_records_on_participant_id", using: :btree
+
+  create_table "location_records", force: :cascade do |t|
+    t.integer  "participant_id"
+    t.integer  "latitude"
+    t.integer  "longitude"
+    t.float    "accuracy"
+    t.integer  "date",           limit: 8
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "location_records", ["participant_id"], name: "index_location_records_on_participant_id", using: :btree
 
   create_table "participants", force: :cascade do |t|
     t.string   "imei"
@@ -111,6 +123,7 @@ ActiveRecord::Schema.define(version: 20150820081220) do
   add_foreign_key "call_log_records", "participants"
   add_foreign_key "collection_sources", "surveys"
   add_foreign_key "installed_app_records", "participants"
+  add_foreign_key "location_records", "participants"
   add_foreign_key "participants", "surveys"
   add_foreign_key "sms_log_records", "participants"
 end
