@@ -41,7 +41,7 @@ module Api
 
     def location
       @participant = Participant.find(params[:participantId])
-      @participant.location_records.create(params[:location].permit(:longitude, :latitude, :accuracy, :source))
+      @participant.location_records.create(params[:location].permit(:longitude, :latitude, :accuracy, :source, :date))
       render json: nil
     end
 
