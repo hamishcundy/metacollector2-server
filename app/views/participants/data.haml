@@ -9,21 +9,21 @@
 .dashboard-block
   .data-block
     %ul.nav.nav-tabs{role:'tablist'}
-      %li.active{role:'presentation'}
+      %li{role:'presentation', class: ('active' if @maxs == 'calls')}
         =link_to "Call logs", "#calls", "data-toggle" => "tab"
-      %li{role:'presentation'}
+      %li{role:'presentation', class: ('active' if @maxs == 'sms')}
         =link_to "SMS logs", "#sms", "data-toggle" => "tab"
-      %li{role:'presentation'}
+      %li{role:'presentation', class: ('active' if @maxs == 'apps')}
         =link_to "Installed apps", "#apps", "data-toggle" => "tab"
-      %li{role:'presentation'}
+      %li{role:'presentation', class: ('active' if @maxs == 'location')}
         =link_to "Location", "#location", "data-toggle" => "tab"
     .tab-content
-      .tab-pane.active#calls{role: 'tabpanel'}
+      .tab-pane#calls{role: 'tabpanel', class: ('active' if @maxs == 'calls')}
         =render :partial => 'calls'
-      .tab-pane#sms{role: 'tabpanel'}
+      .tab-pane#sms{role: 'tabpanel', class: ('active' if @maxs == 'sms')}
         =render :partial => 'sms'
-      .tab-pane#apps{role: 'tabpanel'}
+      .tab-pane#apps{role: 'tabpanel', class: ('active' if @maxs == 'apps')}
         =render :partial => 'apps'
-      .tab-pane#location{role: 'tabpanel'}
+      .tab-pane#location{role: 'tabpanel', class: ('active' if @maxs == 'location')}
         =render :partial => 'location'
   

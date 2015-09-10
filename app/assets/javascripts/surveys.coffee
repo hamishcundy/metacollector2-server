@@ -12,3 +12,4 @@ ready = ->
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
+$('a[data-toggle="tab"]').on('shown.bs.tab', ready)

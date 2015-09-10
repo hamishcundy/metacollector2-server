@@ -49,7 +49,20 @@ class ParticipantsController < ApplicationController
 
   end
   def data
-
+    max_array = Array.new
+    max_array << {:label => 'calls', :value => @participant.call_log_records.count}
+    max_array << {:label => 'sms', :value => @participant.sms_log_records.count}
+    max_array << {:label => 'location', :value => @participant.location_records.count}
+    max_array << {:label => 'apps', :value => @participant.installed_app_records.count}
+    maxi = 0
+    @maxs = ''
+    max_array.each do |e|
+      if e[:value] > maxi 
+        maxi = e[:value]
+        @maxs = e[:label]
+      end
+    end
+    
   end
 
   def get_participant
