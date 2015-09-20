@@ -10,6 +10,10 @@ ready = ->
     $('.dash-container').css("min-height", newheight)
 
 
+  $('tr[data-link]').click ->
+    window.location = @dataset.link
+
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
 $('a[data-toggle="tab"]').on('shown.bs.tab', ready)

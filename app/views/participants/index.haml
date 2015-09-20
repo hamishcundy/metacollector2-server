@@ -17,14 +17,12 @@
         %th
           Email
         %th
-          Type
-        %th
           IMEI
 
         
     %tbody
       -Participant.all.each do |g|
-        %tr
+        %tr{data:{link:"#{summary_participant_path(g)}", :no_turbolink => true}}
           %td
             =g.id
           %td
@@ -32,14 +30,6 @@
           %td
             =g.email
           %td
-            ="SMS: #{g.sms_log_records.count}"
-            %br
-            ="Call log: #{g.call_log_records.count}"
-            %br
-            ="Installed apps: #{g.installed_app_records.count}"
-          %td
             =g.imei
-          %td
-            =link_to summary_participant_path(g), :data => { :no_turbolink => true } do
-              Summary
+          
   

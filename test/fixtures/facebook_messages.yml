@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  facebook_conversation_id: 
+  sender: MyString
+  date: 
+  type: 
+
+two:
+  facebook_conversation_id: 
+  sender: MyString
+  date: 
+  type: 

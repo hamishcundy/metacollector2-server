@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150910105022) do
+ActiveRecord::Schema.define(version: 20150920042856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,34 @@ ActiveRecord::Schema.define(version: 20150910105022) do
     t.boolean  "required"
     t.integer  "survey_id"
   end
+
+  create_table "conversation_participants", force: :cascade do |t|
+    t.integer  "facebook_conversation_id"
+    t.string   "name"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "conversation_participants", ["facebook_conversation_id"], name: "index_conversation_participants_on_facebook_conversation_id", using: :btree
+
+  create_table "facebook_conversations", force: :cascade do |t|
+    t.integer  "participant_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "facebook_conversations", ["participant_id"], name: "index_facebook_conversations_on_participant_id", using: :btree
+
+  create_table "facebook_messages", force: :cascade do |t|
+    t.integer  "facebook_conversation_id"
+    t.string   "sender"
+    t.integer  "date",                     limit: 8
+    t.string   "type"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "facebook_messages", ["facebook_conversation_id"], name: "index_facebook_messages_on_facebook_conversation_id", using: :btree
 
   create_table "installed_app_records", force: :cascade do |t|
     t.string   "packageName"
@@ -123,6 +151,9 @@ ActiveRecord::Schema.define(version: 20150910105022) do
 
   add_foreign_key "call_log_records", "participants"
   add_foreign_key "collection_sources", "surveys"
+  add_foreign_key "conversation_participants", "facebook_conversations"
+  add_foreign_key "facebook_conversations", "participants"
+  add_foreign_key "facebook_messages", "facebook_conversations"
   add_foreign_key "installed_app_records", "participants"
   add_foreign_key "location_records", "participants"
   add_foreign_key "participants", "surveys"

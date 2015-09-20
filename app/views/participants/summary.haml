@@ -21,7 +21,7 @@
       %br
       ="Device IMEI: #{@participant.imei}"
       %br
-      ="Registered: #{@participant.created_at}"
+      ="Registered: #{@participant.created_at.in_time_zone("Auckland").strftime('%c')}"
       %br
       -if @participant.email
         ="Email: #{@participant.email}"
@@ -29,3 +29,21 @@
       -if @participant.name
         ="Name: #{@participant.name}"
         %br
+
+  .summary-panel.panel.panel-default
+    .panel-heading
+      %h4.panel-title Collected metadata
+    .panel-body
+      ="SMS: #{@participant.sms_log_records.count}"
+      %br
+      ="Call log: #{@participant.call_log_records.count}"
+      %br
+      ="Installed apps: #{@participant.installed_app_records.count}"
+      %br
+      ="Contacts: 0"
+      %br
+      ="Facebook conversations: 0"
+      %br
+      ="Facebook messages: 0"
+      %br
+      ="Location: #{@participant.location_records.count}"
