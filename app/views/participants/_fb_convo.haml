@@ -13,7 +13,9 @@
       %tr
         %td
           -if g.conversation_participants.count > 1
-           ="#{g.conversation_participants.count} people"
+            ="#{g.conversation_participants.count} people"
+          -else
+            =g.conversation_participants.first.name
         %td
           =g.messages.count
         
