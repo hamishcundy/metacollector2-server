@@ -52,27 +52,27 @@ class ParticipantsController < ApplicationController
     end
 
     @participant.messages.each do |m|
-      FacebookMessageEvent.create(date: DateTime.strptime((m.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: m.messageType, participant_id: @participant.id)
+      FacebookMessageEvent.create(date: DateTime.strptime((m.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: m.messageType, otherParty: m.messageType == "incoming"? m.sender : m.facebook_conversation.conversation_participants.count == 1? m.facebook_conversation.conversation_participants.first.name : "Group conversation" , participant_id: @participant.id)
     end
   end
 
   def get_type_string(type)
     if type == 1 
-      return "Incoming"
+      return "incoming"
     elsif type == 2 
-      return "Outgoing"
+      return "outgoing"
     elsif type == 3 
-      return "Missed"
+      return "missed"
     elsif type == 4 
-      return "Voicemail"
+      return "voicemail"
     end
   end
 
   def get_sms_string(type)
     if type == 1 
-      return "Incoming"
+      return "incoming"
     elsif type == 2 
-      return "Outgoing"
+      return "outgoing"
     end
   end
 

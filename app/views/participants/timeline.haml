@@ -7,4 +7,34 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
-  #timeline
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th
+          Type
+        %th
+          Direction
+        %th
+          Other party
+        %th
+          Time
+        %th
+          Description
+        
+
+        
+    %tbody
+      -@participant.events.order(date: :desc).each do |g|
+        %tr
+          %td
+            =g.class
+          %td
+            =g.direction
+          %td
+            =g.otherParty
+          %td
+            =g.date.strftime('%c')
+          %td
+            =g.description
+
+        
