@@ -10,7 +10,7 @@
 
       
   %tbody
-    -@participant.sms_log_records.each do |g|
+    -@participant.sms_log_records.order(date: :desc).each do |g|
       %tr
         %td
           =g.address

@@ -11,7 +11,7 @@
 
       
   %tbody
-    -@participant.messages.each do |g|
+    -@participant.messages.order(date: :desc).each do |g|
       %tr
         %td
           =g.sender

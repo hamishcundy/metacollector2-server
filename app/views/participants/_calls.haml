@@ -15,7 +15,7 @@
 
       
   %tbody
-    -@participant.call_log_records.each do |g|
+    -@participant.call_log_records.order(date: :desc).each do |g|
       %tr
         %td
           =g.number

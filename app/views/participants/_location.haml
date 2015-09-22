@@ -15,7 +15,7 @@
 
       
   %tbody
-    -@participant.location_records.each do |g|
+    -@participant.location_records.order(date: :desc).each do |g|
       %tr
         %td
           =g.source
