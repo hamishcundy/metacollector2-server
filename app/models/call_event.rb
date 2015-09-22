@@ -1,0 +1,2 @@
+class CallEvent < Event
+end

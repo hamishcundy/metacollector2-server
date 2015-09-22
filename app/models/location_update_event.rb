@@ -1,0 +1,2 @@
+class LocationUpdateEvent < Event
+end

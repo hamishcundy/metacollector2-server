@@ -34,6 +34,10 @@ class ParticipantsController < ApplicationController
   end
 
   def timeline
+    generate_timeline
+  end
+
+  def generate_timeline
 
   end
 

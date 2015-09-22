@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922043211) do
+ActiveRecord::Schema.define(version: 20150922102513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 20150922043211) do
   end
 
   add_index "conversation_participants", ["facebook_conversation_id"], name: "index_conversation_participants_on_facebook_conversation_id", using: :btree
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "type"
+    t.string   "direction"
+    t.string   "otherParty"
+    t.string   "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.datetime "date"
+    t.integer  "participant_id"
+  end
+
+  add_index "events", ["participant_id"], name: "index_events_on_participant_id", using: :btree
 
   create_table "facebook_conversations", force: :cascade do |t|
     t.integer  "participant_id"
@@ -152,6 +165,7 @@ ActiveRecord::Schema.define(version: 20150922043211) do
   add_foreign_key "call_log_records", "participants"
   add_foreign_key "collection_sources", "surveys"
   add_foreign_key "conversation_participants", "facebook_conversations"
+  add_foreign_key "events", "participants"
   add_foreign_key "facebook_conversations", "participants"
   add_foreign_key "facebook_messages", "facebook_conversations"
   add_foreign_key "installed_app_records", "participants"
