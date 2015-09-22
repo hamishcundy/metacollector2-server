@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150920042856) do
+ActiveRecord::Schema.define(version: 20150922043211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20150920042856) do
     t.integer  "facebook_conversation_id"
     t.string   "sender"
     t.integer  "date",                     limit: 8
-    t.string   "type"
+    t.string   "messageType"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end

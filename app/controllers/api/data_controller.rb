@@ -5,7 +5,7 @@ module Api
 
 
     def upload
-      logger.debug params
+      #logger.debug params
       @participant = Participant.find(params[:participantId])
       @key = params[:source]
 
@@ -19,6 +19,9 @@ module Api
 
         when "installed_apps"
           @participant.installed_app_records.destroy_all
+
+        when "facebook_data"
+          @participant.conversations.destroy_all
         end
 
       #add each record  
@@ -32,6 +35,19 @@ module Api
 
         when "installed_apps"
           @participant.installed_app_records.create(p.permit!)
+
+        when "facebook_data"
+          if p[0] == "name"
+
+          elsif p[0] == "conversations"
+            p[1].each do |con|
+              logger.debug con
+              @participant.conversations.create(con.permit!)
+            end
+            
+          end
+          
+          #@participant.conversations.create(p["conversations"].permit!)
         end
       end
 
