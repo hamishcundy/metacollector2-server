@@ -27,7 +27,7 @@
       -@participant.events.order(date: :desc).each do |g|
         %tr
           %td
-            =g.class
+            =get_label(g.class)
           %td
             =g.direction
           %td

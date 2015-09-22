@@ -19,4 +19,16 @@ module ParticipantsHelper
       return "Outgoing"
     end
   end
+
+  def get_label(type)
+    if type == CallEvent
+      return "Call"
+    elsif type == SmsEvent
+      return "SMS"
+    elsif type == LocationUpdateEvent
+      return "Location"
+    elsif type == FacebookMessageEvent
+      return "Facebook message"
+    end
+  end
 end
