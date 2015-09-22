@@ -17,6 +17,8 @@
         =link_to "Installed apps", "#apps", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'location')}
         =link_to "Location", "#location", "data-toggle" => "tab"
+      %li{role:'presentation', class: ('active' if @maxs == 'fb_convo')}
+        =link_to "Facebook conversations", "#fb_convo", "data-toggle" => "tab"
     .tab-content
       .tab-pane#calls{role: 'tabpanel', class: ('active' if @maxs == 'calls')}
         =render :partial => 'calls'
@@ -26,4 +28,6 @@
         =render :partial => 'apps'
       .tab-pane#location{role: 'tabpanel', class: ('active' if @maxs == 'location')}
         =render :partial => 'location'
+      .tab-pane#fb_convo{role: 'tabpanel', class: ('active' if @maxs == 'fb_convo')}
+        =render :partial => 'fb_convo'
   

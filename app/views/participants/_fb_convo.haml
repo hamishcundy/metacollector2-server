@@ -1,0 +1,21 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        With
+      %th
+        Number of messages
+      
+
+      
+  %tbody
+    -@participant.conversations.each do |g|
+      %tr
+        %td
+          -if g.conversation_participants.count > 1
+           ="#{g.conversation_participants.count} people"
+        %td
+          =g.messages.count
+        
+        
+  
