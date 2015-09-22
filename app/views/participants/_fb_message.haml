@@ -1,0 +1,24 @@
+%table.table.table-striped.table-hover
+  %thead
+    %tr
+      %th
+        Sender
+      %th
+        Type
+      %th
+        Date
+      
+
+      
+  %tbody
+    -@participant.messages.each do |g|
+      %tr
+        %td
+          =g.sender
+        %td
+          =g.messageType
+        %td
+          =DateTime.strptime((g.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%c')
+        
+        
+  

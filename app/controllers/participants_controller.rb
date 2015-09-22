@@ -54,6 +54,7 @@ class ParticipantsController < ApplicationController
     max_array << {:label => 'sms', :value => @participant.sms_log_records.count}
     max_array << {:label => 'location', :value => @participant.location_records.count}
     max_array << {:label => 'apps', :value => @participant.installed_app_records.count}
+    max_array << {:label => 'fb_message', :value => @participant.messages.count}
     maxi = 0
     @maxs = ''
     max_array.each do |e|
