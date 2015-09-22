@@ -11,4 +11,12 @@ module ParticipantsHelper
       return "Voicemail"
     end
   end
+
+  def get_sms_string(type)
+    if type == 1 
+      return "Incoming"
+    elsif type == 2 
+      return "Outgoing"
+    end
+  end
 end

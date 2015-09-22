@@ -38,7 +38,42 @@ class ParticipantsController < ApplicationController
   end
 
   def generate_timeline
+    @participant.events.delete_all
+    @participant.call_log_records.each do |cl|
+      CallEvent.create(date: DateTime.strptime((cl.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: get_type_string(cl.callType), otherParty: (cl.name != nil ? cl.name : 'unknown' ), participant_id: @participant.id)
+    end
 
+    @participant.sms_log_records.each do |cl|
+      SmsEvent.create(date: DateTime.strptime((cl.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: get_sms_string(cl.messageType), otherParty: cl.address, participant_id: @participant.id)
+    end
+
+    @participant.location_records.each do |cl|
+      LocationUpdateEvent.create(date: DateTime.strptime((cl.date / 1000).to_s,'%s').in_time_zone("Auckland"), description: "#{cl.longitude},#{cl.latitude}",participant_id: @participant.id)
+    end
+
+    @participant.messages.each do |m|
+      FacebookMessageEvent.create(date: DateTime.strptime((m.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: m.messageType, participant_id: @participant.id)
+    end
+  end
+
+  def get_type_string(type)
+    if type == 1 
+      return "Incoming"
+    elsif type == 2 
+      return "Outgoing"
+    elsif type == 3 
+      return "Missed"
+    elsif type == 4 
+      return "Voicemail"
+    end
+  end
+
+  def get_sms_string(type)
+    if type == 1 
+      return "Incoming"
+    elsif type == 2 
+      return "Outgoing"
+    end
   end
 
   def analysis

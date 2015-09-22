@@ -4,6 +4,8 @@
       %th
         Number
       %th
+        Type
+      %th
         Time
 
       
@@ -14,6 +16,8 @@
       %tr
         %td
           =g.address
+        %td
+          =get_sms_string(g.messageType)
         %td
           =DateTime.strptime((g.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%c')
 

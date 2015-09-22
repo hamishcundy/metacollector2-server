@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922102513) do
+ActiveRecord::Schema.define(version: 20150922112350) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150922102513) do
   add_index "conversation_participants", ["facebook_conversation_id"], name: "index_conversation_participants_on_facebook_conversation_id", using: :btree
 
   create_table "events", force: :cascade do |t|
-    t.integer  "type"
+    t.string   "type"
     t.string   "direction"
     t.string   "otherParty"
     t.string   "description"
