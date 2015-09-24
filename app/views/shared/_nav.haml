@@ -20,6 +20,10 @@
       %li.subitem{class: ('active' if controller_name == 'participants' && action_name == 'timeline')}
         %i.fa.fa-fw.fa-clock-o
         TIMELINE
+    =link_to(map_participant_path(@participant)) do
+      %li.subitem{class: ('active' if controller_name == 'participants' && action_name == 'map')}
+        %i.fa.fa-fw.fa-map
+        MAP
     =link_to analysis_participant_path(@participant) do
       %li.subitem{class: ('active' if controller_name == 'participants' && action_name == 'analysis')}
         %i.fa.fa-fw.fa-line-chart

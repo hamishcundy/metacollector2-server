@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get '/timeline' => 'participants#timeline'
       get '/timeline_data' => 'participants#timeline_data', :defaults => { :format => 'json'}
       get '/analysis' => 'participants#analysis'
+      get '/map' => 'participants#map'
       post '/generateTimeline' => 'participants#generate_timeline'
     end
   end
