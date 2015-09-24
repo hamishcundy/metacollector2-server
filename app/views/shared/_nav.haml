@@ -16,7 +16,7 @@
       %li.subitem{class: ('active' if controller_name == 'participants' && action_name == 'data')}
         %i.fa.fa-fw.fa-table
         DATA
-    =link_to timeline_participant_path(@participant) do
+    =link_to(timeline_participant_path(@participant), "data-no-turbolink" => true) do
       %li.subitem{class: ('active' if controller_name == 'participants' && action_name == 'timeline')}
         %i.fa.fa-fw.fa-clock-o
         TIMELINE
