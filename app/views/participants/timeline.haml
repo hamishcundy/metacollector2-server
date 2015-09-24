@@ -7,6 +7,18 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
+  .button-bar
+    =link_to generateTimeline_participant_path(@participant), method: :post do
+      .btn.btn-raised.btn-danger
+        %i.fa.fa-trash
+        -if @participant.events.count > 0
+          Regnerate timeline
+        -else
+          Generate timeline
+  -if @participant.events.count > 0
+    ="Timeline last generated: #{@participant.events.first.created_at.in_time_zone("Auckland").strftime('%c')}"
+  -else
+    No timeline available. Click Generate timeline to create.
   %table.table.table-striped.table-hover
     %thead
       %tr

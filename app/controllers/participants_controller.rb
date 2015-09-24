@@ -34,7 +34,7 @@ class ParticipantsController < ApplicationController
   end
 
   def timeline
-    generate_timeline
+    
   end
 
   def generate_timeline
@@ -54,6 +54,8 @@ class ParticipantsController < ApplicationController
     @participant.messages.each do |m|
       FacebookMessageEvent.create(date: DateTime.strptime((m.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: m.messageType, otherParty: m.messageType == "incoming"? m.sender : m.facebook_conversation.conversation_participants.count == 1? m.facebook_conversation.conversation_participants.first.name : "Group conversation" , participant_id: @participant.id)
     end
+
+    redirect_to timeline_participant_path(@participant)
   end
 
   def get_type_string(type)
