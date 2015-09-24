@@ -45,7 +45,7 @@
           %td
             =g.otherParty
           %td
-            =g.date.strftime('%c')
+            =g.date.in_time_zone("Auckland").strftime('%c')
           %td
             =g.description
 
