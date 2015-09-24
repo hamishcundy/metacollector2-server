@@ -89,6 +89,16 @@ class ParticipantsController < ApplicationController
   def summary
 
   end
+
+  def map
+    @locs = @participant.location_records
+    @hash = Gmaps4rails.build_markers(@locs) do |loc, marker|
+      marker.lat loc.latitude
+      marker.lng loc.longitude
+    end
+
+  end
+
   def data
     max_array = Array.new
     max_array << {:label => 'calls', :value => @participant.call_log_records.count}

@@ -34,6 +34,7 @@ gem 'paperclip'
 gem 'default_value_for'
 gem "font-awesome-rails"
 gem "d3-rails"
+gem 'gmaps4rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
