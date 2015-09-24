@@ -10,11 +10,11 @@
   .data-block
     %ul.nav.nav-tabs{role:'tablist'}
       %li{role:'presentation', class: ('active' if @maxs == 'calls')}
-        =link_to "Call logs", "#calls", "data-toggle" => "tab"
+        =link_to "Calls", "#calls", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'sms')}
-        =link_to "SMS logs", "#sms", "data-toggle" => "tab"
+        =link_to "SMS", "#sms", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'apps')}
-        =link_to "Installed apps", "#apps", "data-toggle" => "tab"
+        =link_to "Apps", "#apps", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'location')}
         =link_to "Location", "#location", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'fb_convo')}
