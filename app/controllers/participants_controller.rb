@@ -40,7 +40,7 @@ class ParticipantsController < ApplicationController
   def generate_timeline
     @participant.events.delete_all
     @participant.call_log_records.each do |cl|
-      CallEvent.create(date: DateTime.strptime((cl.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: get_type_string(cl.callType), otherParty: (cl.name != nil ? cl.name : 'unknown' ), participant_id: @participant.id)
+      CallEvent.create(date: DateTime.strptime((cl.date / 1000).to_s,'%s').in_time_zone("Auckland"), direction: get_type_string(cl.callType), otherParty: (cl.name != nil ? cl.name : cl.number != nil ? cl.number : "Unknown"), participant_id: @participant.id)
     end
 
     @participant.sms_log_records.each do |cl|

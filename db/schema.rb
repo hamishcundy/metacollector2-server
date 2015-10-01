@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150922112350) do
+ActiveRecord::Schema.define(version: 20151001043717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,28 @@ ActiveRecord::Schema.define(version: 20150922112350) do
     t.boolean  "required"
     t.integer  "survey_id"
   end
+
+  create_table "contact_data_records", force: :cascade do |t|
+    t.integer  "contact_record_id"
+    t.string   "dataType"
+    t.string   "subType"
+    t.string   "data"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "contact_data_records", ["contact_record_id"], name: "index_contact_data_records_on_contact_record_id", using: :btree
+
+  create_table "contact_records", force: :cascade do |t|
+    t.integer  "participant_id"
+    t.string   "displayName"
+    t.integer  "lastTimeContacted", limit: 8
+    t.integer  "timesContacted"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+  end
+
+  add_index "contact_records", ["participant_id"], name: "index_contact_records_on_participant_id", using: :btree
 
   create_table "conversation_participants", force: :cascade do |t|
     t.integer  "facebook_conversation_id"
@@ -164,6 +186,8 @@ ActiveRecord::Schema.define(version: 20150922112350) do
 
   add_foreign_key "call_log_records", "participants"
   add_foreign_key "collection_sources", "surveys"
+  add_foreign_key "contact_data_records", "contact_records"
+  add_foreign_key "contact_records", "participants"
   add_foreign_key "conversation_participants", "facebook_conversations"
   add_foreign_key "events", "participants"
   add_foreign_key "facebook_conversations", "participants"
