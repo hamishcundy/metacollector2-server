@@ -16,7 +16,7 @@ module Api
         when "sms_logs"
           @participant.sms_log_records.destroy_all
         when "contacts"
-
+          @participant.contact_records.destroy_all
         when "installed_apps"
           @participant.installed_app_records.destroy_all
 
@@ -32,7 +32,7 @@ module Api
         when "sms_logs"
           @participant.sms_log_records.create(p.permit!)
         when "contacts"
-
+          @participant.contact_records.create(p.permit!)
         when "installed_apps"
           @participant.installed_app_records.create(p.permit!)
 
