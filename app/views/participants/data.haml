@@ -21,6 +21,8 @@
         =link_to "Facebook conversations", "#fb_convo", "data-toggle" => "tab"
       %li{role:'presentation', class: ('active' if @maxs == 'fb_message')}
         =link_to "Facebook messages", "#fb_message", "data-toggle" => "tab"
+      %li{role:'presentation', class: ('active' if @maxs == 'contacts')}
+        =link_to "Contacts", "#contacts", "data-toggle" => "tab"
     .tab-content
       .tab-pane#calls{role: 'tabpanel', class: ('active' if @maxs == 'calls')}
         =render :partial => 'calls'
@@ -34,4 +36,6 @@
         =render :partial => 'fb_convo'
       .tab-pane#fb_message{role: 'tabpanel', class: ('active' if @maxs == 'fb_message')}
         =render :partial => 'fb_message'
+      .tab-pane#contacts{role: 'tabpanel', class: ('active' if @maxs == 'contacts')}
+        =render :partial => 'contacts'
   
