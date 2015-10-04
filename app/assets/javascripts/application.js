@@ -19,4 +19,5 @@
 //= require bootstrap-sprockets
 //= require underscore-min
 //= require gmaps/google
+//= require bootstrap-datepicker
 
