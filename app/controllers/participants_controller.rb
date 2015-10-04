@@ -96,7 +96,11 @@ class ParticipantsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@locs) do |loc, marker|
       marker.lat loc.latitude.round(4)
       marker.lng loc.longitude.round(4)
-      #marker.marker_title "Test"
+      marker.picture({
+                        :url    => (loc.source == "GPS" ? "/assets/gps_red2.png" : "/assets/gps_orange2.png"),
+                        :width  => "24",
+                        :height => "24"
+                      })
       marker.infowindow "#{DateTime.strptime((loc.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} <br/>Accuracy: #{loc.accuracy.to_i}m"
     end
 
