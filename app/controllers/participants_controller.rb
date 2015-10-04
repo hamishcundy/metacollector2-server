@@ -93,8 +93,10 @@ class ParticipantsController < ApplicationController
   def map
     @locs = @participant.location_records.where('date BETWEEN ? AND ?', DateTime.now.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, DateTime.now.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000)
     @hash = Gmaps4rails.build_markers(@locs) do |loc, marker|
-      marker.lat loc.latitude
-      marker.lng loc.longitude
+      marker.lat loc.latitude.round(4)
+      marker.lng loc.longitude.round(4)
+      #marker.marker_title "Test"
+      marker.infowindow DateTime.strptime((loc.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')
     end
 
   end
