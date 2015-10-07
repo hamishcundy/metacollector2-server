@@ -5,5 +5,15 @@
         =Participant.all.count
       .dash-label
         participants
+  #mini-map
+:javascript
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'mini-map'}}, function(){
+    markers = handler.addMarkers(#{raw @hash.to_json });
+    //polylines = handler.addPolylines(#{raw @hash.to_json});
+    handler.bounds.extendWith(markers);
+    //handler.bounds.extendWith(polylines);
+    handler.fitMapToBounds();
+  });
     
   
