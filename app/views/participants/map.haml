@@ -7,9 +7,10 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
-  .input-group.col-xs-6
-    =form_tag(map_participant_path(@participant), :method => :get) do
-      %input.form-control{name: "date", type:"text", data:{provide:'datepicker', date:{format: "yyyy-mm-dd", autoclose: "true"}}, placeholder:"Select date", value:@date}
+  =form_tag(map_participant_path(@participant), :method => :get) do
+    .input-group.col-xs-6
+    
+      %input.form-control{name: "date", type:"text", data:{provide:'datepicker', date:{format: "yyyy-mm-dd", autoclose: "true", today:{highlight: "true", btn:"linked"}, end:{date: DateTime.now.in_time_zone("Auckland").to_date}}}, placeholder:"Select date", value:@date}
       %span.input-group-btn
         =button_tag(type:'submit', class:"btn btn-default") do
           Show
