@@ -26,7 +26,7 @@
               
           %tbody
             -Participant.last(5).each do |g|
-              %tr
+              %tr{data:{link:"#{summary_participant_path(g)}", :no_turbolink => true}}
                 %td
                   =g.id
                 %td
