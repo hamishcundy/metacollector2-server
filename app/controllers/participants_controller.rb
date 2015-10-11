@@ -96,8 +96,8 @@ class ParticipantsController < ApplicationController
     @locs = @participant.location_records.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000)
     @smoothed_locs = get_smooth_location(@locs)
     @hash = Gmaps4rails.build_markers(@smoothed_locs) do |loc, marker|
-      marker.lat loc.average_latitude.round(4)
-      marker.lng loc.average_longitude.round(4)
+      marker.lat loc.average_latitude
+      marker.lng loc.average_longitude
       marker.picture({
                         :url    => ActionController::Base.helpers.asset_path(loc.first.source == "gps" ? "gps_red2.png" : "gps_orange2.png"),
                         :width  => 24,
@@ -116,12 +116,14 @@ class ParticipantsController < ApplicationController
     smoothed_location_records = Array.new
 
     raw_location_records.each do |r|
-      if smoothed_location_records.length > 0 and is_close_enough(smoothed_location_records.last, r)
-        smoothed_location_records.last.add(r)
-      else
-        slr = SmoothedLocationRecord.new
-        slr.add(r)
-        smoothed_location_records << slr
+      if r.accuracy < 200
+        if smoothed_location_records.length > 0 and is_close_enough(smoothed_location_records.last, r)
+          smoothed_location_records.last.add(r)
+        else
+          slr = SmoothedLocationRecord.new
+          slr.add(r)
+          smoothed_location_records << slr
+        end
       end
     end
     return smoothed_location_records
