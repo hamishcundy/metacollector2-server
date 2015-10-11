@@ -93,7 +93,7 @@ class ParticipantsController < ApplicationController
   def map
     @date = params[:date]? Date.parse(params[:date]) : DateTime.now.in_time_zone("Auckland").to_date
     
-    @locs = @participant.location_records.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000)
+    @locs = @participant.location_records.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000).order(date: :asc)
     @smoothed_locs = get_smooth_location(@locs)
     @hash = Gmaps4rails.build_markers(@smoothed_locs) do |loc, marker|
       marker.lat loc.average_latitude
