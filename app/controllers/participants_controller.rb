@@ -131,7 +131,7 @@ class ParticipantsController < ApplicationController
   end
 
   def is_close_enough(slr, lr)
-    if (slr.average_latitude - lr.latitude).abs < 0.0005 and (slr.average_longitude - lr.longitude).abs < 0.0005
+    if (slr.average_latitude - lr.latitude).abs < 0.0008 and (slr.average_longitude - lr.longitude).abs < 0.0008
       return true
     end
     return false
