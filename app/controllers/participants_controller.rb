@@ -94,19 +94,47 @@ class ParticipantsController < ApplicationController
     @date = params[:date]? Date.parse(params[:date]) : DateTime.now.in_time_zone("Auckland").to_date
     
     @locs = @participant.location_records.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000)
-    @hash = Gmaps4rails.build_markers(@locs) do |loc, marker|
-      marker.lat loc.latitude.round(4)
-      marker.lng loc.longitude.round(4)
+    @smoothed_locs = get_smooth_location(@locs)
+    @hash = Gmaps4rails.build_markers(@smoothed_locs) do |loc, marker|
+      marker.lat loc.average_latitude.round(4)
+      marker.lng loc.average_longitude.round(4)
       marker.picture({
-                        :url    => ActionController::Base.helpers.asset_path(loc.source == "gps" ? "gps_red2.png" : "gps_orange2.png"),
+                        :url    => ActionController::Base.helpers.asset_path(loc.first.source == "gps" ? "gps_red2.png" : "gps_orange2.png"),
                         :width  => 24,
                         :height => 24
                       })
-      marker.infowindow "#{DateTime.strptime((loc.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} <br/>Accuracy: #{loc.accuracy.to_i}m"
+      marker.infowindow "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} <br/>Accuracy: #{loc.first.accuracy.to_i}m"
     end
     
 
   end
+
+  def get_smooth_location(raw_location_records)
+    #need to take list of location records provided and return a "smoothed" list
+    #-filter out readings with accuracy of > 200m
+    #-combine consecutive locations if distance between them is less than X
+    smoothed_location_records = Array.new
+
+    raw_location_records.each do |r|
+      if smoothed_location_records.length > 0 and is_close_enough(smoothed_location_records.last, r)
+        smoothed_location_records.last.add(r)
+      else
+        slr = SmoothedLocationRecord.new
+        slr.add(r)
+        smoothed_location_records << slr
+      end
+    end
+    return smoothed_location_records
+    
+  end
+
+  def is_close_enough(slr, lr)
+    if (slr.average_latitude - lr.latitude).abs < 0.001 and (slr.average_longitude - lr.longitude).abs < 0.001
+      return true
+    end
+    return false
+  end
+
 
   def data
     max_array = Array.new
