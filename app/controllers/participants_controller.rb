@@ -103,7 +103,7 @@ class ParticipantsController < ApplicationController
                         :width  => 24,
                         :height => 24
                       })
-      marker.infowindow "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} <br/>Accuracy: #{loc.first.accuracy.to_i}m"
+      marker.infowindow "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} - #{DateTime.strptime((loc.last.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}<br/>Count: #{loc.count}"
     end
     
 

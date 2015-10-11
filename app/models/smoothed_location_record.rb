@@ -20,6 +20,15 @@ class SmoothedLocationRecord
     return @raw_locations.first
   end
 
+  def last
+    return @raw_locations.last
+
+  end
+
+  def count
+    return @raw_locations.length
+  end
+
 
   def add(location_record)
     if @raw_locations == nil
