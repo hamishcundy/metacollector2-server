@@ -70,6 +70,18 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def get_descr_string(type)
+    if type == 1 
+      return "from"
+    elsif type == 2 
+      return "to"
+    elsif type == 3 
+      return "from"
+    elsif type == 4 
+      return "to"
+    end
+  end
+
   def get_type_image(type)
     if type == 1 
       return "phonein.png"
@@ -167,7 +179,7 @@ class ParticipantsController < ApplicationController
                          :width  => 40,
                          :height => 40
                        })
-      marker.infowindow ("<b> #{get_type_string(call[:data][:callType]).titleize} call to/from #{(call[:data][:name] != nil ? call[:data][:name] : call[:data][:formattedNumber])}</b><br>#{DateTime.strptime((call[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
+      marker.infowindow ("<b> #{get_type_string(call[:data][:callType]).titleize} call #{get_descr_string(call[:data][:callType])} #{(call[:data][:name] != nil ? call[:data][:name] : call[:data][:formattedNumber])}</b><br>#{DateTime.strptime((call[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
 
   end
