@@ -130,7 +130,7 @@ class ParticipantsController < ApplicationController
                          :width  => 40,
                          :height => 40
                        })
-      marker.infowindow "<b>#{fbm[:data][:messageType]} facebook message</b> Test"
+      marker.infowindow (fbm[:data][:messageType] != 'incoming'? "<b>Facebook message to #{}</b><br> Test" : "<b>Facebook message from #{fbm[:data][:sender]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
 
   end
