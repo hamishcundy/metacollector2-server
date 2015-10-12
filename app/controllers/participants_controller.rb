@@ -126,11 +126,11 @@ class ParticipantsController < ApplicationController
       marker.lat fbm[:loc][:latitude]
       marker.lng fbm[:loc][:longitude]
       marker.picture({
-                         :url    => ActionController::Base.helpers.asset_path("fb_messengerin.png"),
+                         :url    => (fbm[:data][:messageType] == 'incoming'? ActionController::Base.helpers.asset_path("fb_messengerin.png") : ActionController::Base.helpers.asset_path("fb_messengerout.png")),
                          :width  => 40,
                          :height => 40
                        })
-      marker.infowindow "<b>Outgoing facebook message</b> Test"
+      marker.infowindow "<b>#{fbm[:data][:messageType]} facebook message</b> Test"
     end
 
   end
