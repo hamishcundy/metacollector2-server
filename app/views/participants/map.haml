@@ -6,6 +6,7 @@
 =content_for :nav do
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
+= javascript_include_tag 'http://jawj.github.io/OverlappingMarkerSpiderfier/bin/oms.min.js'
 .dashboard-block
   =form_tag(map_participant_path(@participant), :method => :get) do
     .input-group.col-xs-6
