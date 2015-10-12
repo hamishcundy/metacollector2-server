@@ -116,7 +116,7 @@ class ParticipantsController < ApplicationController
       elsif earlier != nil and later == nil
         @fb_messages << {data: fb, loc: earlier}
       elsif later != nil and later != nil
-        sel = (fb.date - earlier.date).abs < (later.date - fb.date).abs ? earlier : later
+        sel = (fb.date - earlier.date).abs > (later.date - fb.date).abs ? earlier : later
         @fb_messages << {data: fb, loc: sel, to: (fb.facebook_conversation.conversation_participants.count > 1 ? "Group conversation" : fb.facebook_conversation.conversation_participants.first.name)}
       end
       
