@@ -98,11 +98,11 @@ class ParticipantsController < ApplicationController
     @hash = Gmaps4rails.build_markers(@smoothed_locs) do |loc, marker|
       marker.lat loc.average_latitude
       marker.lng loc.average_longitude
-      marker.picture({
-                        :url    => ActionController::Base.helpers.asset_path("gps_orange2.png"),
-                        :width  => 24,
-                        :height => 24
-                      })
+      # marker.picture({
+      #                   :url    => ActionController::Base.helpers.asset_path("gps_orange2.png"),
+      #                   :width  => 24,
+      #                   :height => 24
+      #                 })
       marker.infowindow (loc.count > 1? "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} - #{DateTime.strptime((loc.last.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}" : "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
     
