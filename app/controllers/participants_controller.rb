@@ -110,13 +110,13 @@ class ParticipantsController < ApplicationController
     @fb_messages = Array.new
     get_facebook_messages.each do |fb|
       earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order(date: :asc).last
-      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order(date: :desc).first
+      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order(date: :desc).last
       if earlier == nil and later != nil
         @fb_messages << {data: fb, loc: later}  
       elsif earlier != nil and later == nil
         @fb_messages << {data: fb, loc: earlier}
       elsif later != nil and later != nil
-        sel = (fb.date - earlier.date).abs > (later.date - fb.date).abs ? earlier : later
+        sel = (fb.date - earlier.date).abs < (later.date - fb.date).abs ? earlier : later
         @fb_messages << {data: fb, loc: sel, to: (fb.facebook_conversation.conversation_participants.count > 1 ? "Group conversation" : fb.facebook_conversation.conversation_participants.first.name)}
       end
       
