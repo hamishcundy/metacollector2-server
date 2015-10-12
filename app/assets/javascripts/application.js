@@ -18,6 +18,7 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require underscore-min
+//= require oms-min
 //= require gmaps/google
 //= require bootstrap-datepicker
 
