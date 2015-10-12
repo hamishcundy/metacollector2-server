@@ -108,15 +108,22 @@ class ParticipantsController < ApplicationController
     
     @fb_messages = Array.new
     get_facebook_messages.each do |fb|
-      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order_by(date: :asc).limit(1)
-      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order_by(date: :desc).limit(1)
-      sel = (fb.date - earlier).abs < (later - fb.date).abs ? earlier : later
-      @fb_messages << {data: fb, loc: sel}
+      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order(date: :asc).limit(1).first
+      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order(date: :desc).limit(1).last
+      if earlier == nil and later != nil
+        @fb_messages << {data: fb, loc: later}  
+      elsif earlier != nil and later == nil
+        @fb_messages << {data: fb, loc: earlier}
+      elsif later != nil and later != nil
+        sel = (fb.date - earlier.date).abs < (later.date - fb.date).abs ? earlier : later
+        @fb_messages << {data: fb, loc: sel}
+      end
+      
     end
 
     @fb_message_markers = Gmaps4rails.build_markers(@fb_messages) do |fbm, marker|
-      marker.lat fbm.loc.latitude
-      marker.lng fbm.loc.longitude
+      marker.lat fbm[:loc][:latitude]
+      marker.lng fbm[:loc][:longitude]
       marker.picture({
                          :url    => ActionController::Base.helpers.asset_path("fb_messengerin.png"),
                          :width  => 24,
