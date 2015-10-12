@@ -7,8 +7,7 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
-  ="FB messages: #{@fb_messages.count}"
-  ="markers: #{@fb_message_markers.count}"
+  
 
   =form_tag(map_participant_path(@participant), :method => :get) do
     .input-group.col-xs-6
@@ -24,10 +23,10 @@
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(#{raw @hash.to_json });
-    fb_markers = handler.addMarkers(#{raw @fb_message_markers.to_json });
-    polylines = handler.addPolylines([#{raw @hash.to_json}], { strokeColor: '#FF0000'});
+    //fb_markers = handler.addMarkers(#{raw @fb_message_markers.to_json });
+    polylines = handler.addPolylines([#{raw @poly_hash.to_json}], { strokeColor: '#FF0000'});
     handler.bounds.extendWith(markers);
-    handler.bounds.extendWith(fb_markers);
+    //handler.bounds.extendWith(fb_markers);
     handler.bounds.extendWith(polylines);
     handler.fitMapToBounds();
     

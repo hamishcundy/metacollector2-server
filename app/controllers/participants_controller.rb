@@ -105,6 +105,7 @@ class ParticipantsController < ApplicationController
       #                 })
       marker.infowindow (loc.count > 1? "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} - #{DateTime.strptime((loc.last.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}" : "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
+    @poly_hash = @hash
     
     @fb_messages = Array.new
     get_facebook_messages.each do |fb|
@@ -121,13 +122,13 @@ class ParticipantsController < ApplicationController
       
     end
 
-    @fb_message_markers = Gmaps4rails.build_markers(@fb_messages) do |fbm, marker|
+    @hash = @hash + Gmaps4rails.build_markers(@fb_messages) do |fbm, marker|
       marker.lat fbm[:loc][:latitude]
       marker.lng fbm[:loc][:longitude]
       marker.picture({
                          :url    => ActionController::Base.helpers.asset_path("fb_messengerin.png"),
-                         :width  => 24,
-                         :height => 24
+                         :width  => 40,
+                         :height => 40
                        })
       marker.infowindow "<b>Outgoing facebook message</b> Test"
     end
