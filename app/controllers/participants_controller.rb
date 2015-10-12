@@ -109,8 +109,8 @@ class ParticipantsController < ApplicationController
     
     @fb_messages = Array.new
     get_facebook_messages.each do |fb|
-      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order(date: :asc).limit(1).first
-      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order(date: :desc).limit(1).last
+      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order(date: :asc).last
+      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order(date: :desc).first
       if earlier == nil and later != nil
         @fb_messages << {data: fb, loc: later}  
       elsif earlier != nil and later == nil
