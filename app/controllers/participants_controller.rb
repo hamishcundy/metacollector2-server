@@ -99,7 +99,7 @@ class ParticipantsController < ApplicationController
       marker.lat loc.average_latitude
       marker.lng loc.average_longitude
       marker.picture({
-                        :url    => ActionController::Base.helpers.asset_path("gps_red2.png"),
+                        :url    => ActionController::Base.helpers.asset_path("gps_orange2.png"),
                         :width  => 24,
                         :height => 24
                       })
