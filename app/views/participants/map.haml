@@ -7,6 +7,8 @@
   =render :partial => 'shared/nav'
 =render :partial => 'shared/alert'
 .dashboard-block
+  ="FB messages: #{@fb_messages.count}"
+
   =form_tag(map_participant_path(@participant), :method => :get) do
     .input-group.col-xs-6
     
