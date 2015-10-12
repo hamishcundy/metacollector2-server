@@ -117,7 +117,7 @@ class ParticipantsController < ApplicationController
         @fb_messages << {data: fb, loc: earlier}
       elsif later != nil and later != nil
         sel = (fb.date - earlier.date).abs < (later.date - fb.date).abs ? earlier : later
-        @fb_messages << {data: fb, loc: sel}
+        @fb_messages << {data: fb, loc: sel, to: (fb.facebook_conversation.conversation_participants.count > 1 ? "Group conversation" : fb.facebook_conversation.conversation_participants.first.name)}
       end
       
     end
@@ -130,7 +130,7 @@ class ParticipantsController < ApplicationController
                          :width  => 40,
                          :height => 40
                        })
-      marker.infowindow (fbm[:data][:messageType] != 'incoming'? "<b>Facebook message to #{}</b><br> Test" : "<b>Facebook message from #{fbm[:data][:sender]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
+      marker.infowindow (fbm[:data][:messageType] != 'incoming'? "<b>Facebook message to #{fbm[:to]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}" : "<b>Facebook message from #{fbm[:data][:sender]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
 
   end
