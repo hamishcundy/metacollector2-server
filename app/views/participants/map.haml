@@ -21,6 +21,7 @@
   handler = Gmaps.build('Google');
   handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
     markers = handler.addMarkers(#{raw @hash.to_json });
+    fb_markers = handler.addMarkers(#{raw @fb_message_markers.to_json });
     polylines = handler.addPolylines([#{raw @hash.to_json}], { strokeColor: '#FF0000'});
     handler.bounds.extendWith(markers);
     handler.bounds.extendWith(polylines);

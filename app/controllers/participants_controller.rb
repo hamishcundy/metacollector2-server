@@ -106,6 +106,24 @@ class ParticipantsController < ApplicationController
       marker.infowindow (loc.count > 1? "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')} - #{DateTime.strptime((loc.last.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}" : "#{DateTime.strptime((loc.first.date / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
     
+    @fb_messages = Array.new
+    get_facebook_messages.each do |fb|
+      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", fb.date).order_by(date: :asc).limit(1)
+      later = @participant.location_records.where("date >= ? AND accuracy < 200", fb.date).order_by(date: :desc).limit(1)
+      sel = (fb.date - earlier).abs < (later - fb.date).abs ? earlier : later
+      @fb_messages << {data: fb, loc: sel}
+    end
+
+    @fb_message_markers = Gmaps4rails.build_markers(@fb_messages) do |fbm, marker|
+      marker.lat fbm.loc.latitude
+      marker.lng fbm.loc.longitude
+      marker.picture({
+                         :url    => ActionController::Base.helpers.asset_path("fb_messengerin.png"),
+                         :width  => 24,
+                         :height => 24
+                       })
+      marker.infowindow "<b>Outgoing facebook message</b> Test"
+    end
 
   end
 
@@ -126,8 +144,13 @@ class ParticipantsController < ApplicationController
         end
       end
     end
+    
     return smoothed_location_records
     
+  end
+
+  def get_facebook_messages
+    return @participant.messages.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000).order(date: :asc)
   end
 
   def is_close_enough(slr, lr)
