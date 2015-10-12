@@ -70,6 +70,18 @@ class ParticipantsController < ApplicationController
     end
   end
 
+  def get_type_image(type)
+    if type == 1 
+      return "phonein.png"
+    elsif type == 2 
+      return "phoneout.png"
+    elsif type == 3 
+      return "phonemissed.png"
+    elsif type == 4 
+      return "phoneout.png"
+    end
+  end
+
   def get_sms_string(type)
     if type == 1 
       return "incoming"
@@ -133,6 +145,31 @@ class ParticipantsController < ApplicationController
       marker.infowindow (fbm[:data][:messageType] != 'incoming'? "<b>Facebook message to #{fbm[:to]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}" : "<b>Facebook message from #{fbm[:data][:sender]}</b><br>#{DateTime.strptime((fbm[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
     end
 
+    @calls = Array.new
+    get_calls.each do |c|
+      earlier = @participant.location_records.where("date <= ? AND accuracy < 200", c.date).order(date: :asc).last
+      later = @participant.location_records.where("date >= ? AND accuracy < 200", c.date).order(date: :desc).last
+      if earlier == nil and later != nil
+        @calls << {data: c, loc: later}  
+      elsif earlier != nil and later == nil
+        @calls << {data: c, loc: earlier}
+      elsif later != nil and later != nil
+        sel = (c.date - earlier.date).abs < (later.date - c.date).abs ? earlier : later
+        @calls << {data: c, loc: sel}
+      end
+    end
+
+    @hash = @hash + Gmaps4rails.build_markers(@calls) do |call, marker|
+      marker.lat call[:loc][:latitude]
+      marker.lng call[:loc][:longitude]
+      marker.picture({
+                         :url    => ActionController::Base.helpers.asset_path(get_type_image(call[:data][:callType])),
+                         :width  => 40,
+                         :height => 40
+                       })
+      marker.infowindow ("<b> #{get_type_string(call[:data][:callType]).titleize} call to/from #{(call[:data][:name] != nil ? call[:data][:name] : call[:data][:formattedNumber])}</b><br>#{DateTime.strptime((call[:data][:date] / 1000).to_s,'%s').in_time_zone("Auckland").strftime('%r')}")
+    end
+
   end
 
   def get_smooth_location(raw_location_records)
@@ -159,6 +196,11 @@ class ParticipantsController < ApplicationController
 
   def get_facebook_messages
     return @participant.messages.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000).order(date: :asc)
+  end
+
+  def get_calls
+    return @participant.call_log_records.where('date BETWEEN ? AND ?', @date.in_time_zone("Auckland").beginning_of_day.to_time.to_i * 1000, @date.in_time_zone("Auckland").end_of_day.to_time.to_i * 1000).order(date: :asc)
+  
   end
 
   def is_close_enough(slr, lr)
